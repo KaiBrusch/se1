@@ -9,8 +9,10 @@ public class Main {
 		Integer nr = null;
 		String name = null;
 		Email email = null;
-//		Gast g = ErzeugeGast(nr, name, email);
-//		Gast SucheGastNachName(String name);
+		// Gast g = ErzeugeGast(nr, name, email);
+		// Gast SucheGastNachName(String name);
+		// ReserviereZimmer();
+		// BucheZusatzleistung();
 
 	}
 }

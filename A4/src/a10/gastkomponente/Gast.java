@@ -13,6 +13,12 @@ public class Gast {
 		this.email = email;
 		this.istStammkunde = istStammkunde;
 	}
+	
+	public Gast(Integer nr, String name, Email email) {
+		this.nr = nr;
+		this.name = name;
+		this.email = email;
+	}
 
 	@Override
 	public String toString() {

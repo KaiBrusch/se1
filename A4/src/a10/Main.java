@@ -1,7 +1,7 @@
 package a10;
 
+import a10.gastkomponente.Email;
 import a10.gastkomponente.Gast;
-import a10.util.Email;
 
 public class Main {
 

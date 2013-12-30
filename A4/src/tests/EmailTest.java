@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-import a10.util.Email;
+import a10.gastkomponente.Email;
 
 public class EmailTest {
 

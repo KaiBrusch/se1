@@ -1,4 +1,4 @@
-package a10.util;
+package a10.gastkomponente;
 
 public final class Email {
 

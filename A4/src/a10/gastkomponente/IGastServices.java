@@ -1,10 +1,14 @@
 package a10.gastkomponente;
 
-import a10.util.*;
+import a10.gastkomponente.Gast;
 
 public interface IGastServices {
 
-	Gast ErzeugeGast(Integer nr, String name, Email email);
+	Gast erzeugeGast(Integer nr, String name, Email email);
 	
-	Gast SucheGastNachName(String name);
+	Gast sucheGastNachName(String name);
+	
+	void updateGast(Gast gast);
+	
+	void deleteGast(Gast gast);
 }

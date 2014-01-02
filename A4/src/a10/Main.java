@@ -44,12 +44,12 @@ public class Main {
 		Integer zimmerNr = 20;
 		Reservierung res = reservierungService.reserviereZimmer(matze.getNr(),
 				zimmerNr);
+		// BucheZusatzleistung
 		reservierungService.bucheZusatzleistung(res.getNr(), sauna.getNr());
 		reservierungService.bucheZusatzleistung(res.getNr(),
 				vollpension.getNr());
 		reservierungService.bucheZusatzleistung(res.getNr(), wlan.getNr());
-		// BucheZusatzleistung (Assertion 5 Reservierungen || 3 reservierungen +
-		// zusatzleistung
+		// makeStammKunde (Assertion 5 Reservierungen || 3 reservierungen 
 
 	}
 }

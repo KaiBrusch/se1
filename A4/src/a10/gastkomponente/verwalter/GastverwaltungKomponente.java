@@ -4,8 +4,9 @@ import persistenz.IPersistenzService;
 import a10.gastkomponente.Email;
 import a10.gastkomponente.Gast;
 import a10.gastkomponente.IGastServices;
+import a10.gastkomponente.IGastServicesFuerReservierung;
 
-public class GastverwaltungKomponente implements IGastServices {
+public class GastverwaltungKomponente implements IGastServices, IGastServicesFuerReservierung {
 
 	private Gastverwalter gastVerwalter = null;
 	private GastverwaltungAnwendungsfall gastVerwaltungAnwendungsfall = null;
@@ -25,5 +26,10 @@ public class GastverwaltungKomponente implements IGastServices {
 	public Gast sucheGastNachName(String name) {
 		return this.gastVerwaltungAnwendungsfall.sucheGastNachName(name);
 	}
+
+	@Override
+	public void markiereGastAlsStammkunden(Integer nr) {
+		this.gastVerwaltungAnwendungsfall.markiereGastAlsStammkunden(nr);
+	}	
 
 }

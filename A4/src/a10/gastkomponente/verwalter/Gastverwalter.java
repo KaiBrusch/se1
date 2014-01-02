@@ -34,12 +34,10 @@ public class Gastverwalter {
 
 		String email = "";
 		Integer nr = 0;
-		String name_ = "";
 		boolean stamm = false;
 		try {
 			while (rs.next()) {
 				email = (rs.getString("Email"));
-				name_ = rs.getString("name");
 				nr = (rs.getInt(("Nr")));
 				stamm = (rs.getBoolean("IstStammkunde"));
 
@@ -47,7 +45,7 @@ public class Gastverwalter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Gast gast = new Gast(nr, name_, emailConvertFromString(email));
+		Gast gast = new Gast(nr, name, emailConvertFromString(email));
 		System.out.println(gast);
 		return gast;
 	}

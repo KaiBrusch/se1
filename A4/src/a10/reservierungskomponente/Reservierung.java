@@ -2,19 +2,15 @@ package a10.reservierungskomponente;
 
 import java.util.List;
 
-import a10.gastkomponente.Gast;
-
 public class Reservierung {
 
-	private Gast gast;
 	private Integer nr;
 	private Integer zimmerNr;
 	private List<Zusatzleistung> zLeistungen;
 
-	public Reservierung(Integer nr, Integer zimmerNr, Gast gast) {
+	public Reservierung(Integer nr, Integer zimmerNr) {
 		this.nr = nr;
 		this.zimmerNr = zimmerNr;
-		this.gast = gast;
 	}
 
 	@Override

@@ -33,23 +33,21 @@ public class Gastverwalter {
 		gw.sucheGastNachName("test");
 	}
 
-	private SqlConnecter sqlc;
+	private IPersistenzService persistenzService;
 
-	public Gastverwalter(SqlConnecter sqlc) {
-		this.sqlc = sqlc;
+	public Gastverwalter(IPersistenzService persistenzService) {
+		this.persistenzService = persistenzService;
 
 	}
 
 	public Gast sucheGastNachName(String name) throws Exception {
 		// look by the name
-		ResultSet rs = sqlc.readGast(name);
+		ResultSet rs = persistenzService.read(name, "gast");
 		
 		String email = "";
 		Integer nr = 0;
 		String name_ = "";
-		
 		while(rs.next()){
-			
 			email = (rs.getString("Email"));
 			name_ = rs.getString("name");
 			nr = (rs.getInt(("Nr")));
@@ -69,12 +67,6 @@ public class Gastverwalter {
 		  String domain = s[2];
 		  return Email.email(name, server, domain);
 	  }
-	
-	public void deleteGast(String name) throws Exception {
-
-		sqlc.removeFromDB(name, "gast");
-		
-	}
 
 	public void erzeugeGast(String name, String email, boolean stammkunde)
 			throws Exception {
@@ -84,19 +76,11 @@ public class Gastverwalter {
 		parameterList.add(name);
 		parameterList.add(email);
 		
-
+		String query = "";
+//		"gast", parameterList
 		// insert into table gast with given parameters
-		sqlc.insertIntoDB("gast", parameterList);
+		persistenzService.create(query);
 	}
 
-//	public void updateGast(String name, String email) throws Exception {
-//
-//		// String lookUpByParameter = "name";
-//		ArrayList<String> parameterList = new ArrayList<String>();
-//		// parameterList.add(name);
-//		parameterList.add(email);
-//		System.out.println(parameterList);
-//		sqlc.updateEntryFromDB("gast", name, parameterList);
-//	}
 
 }

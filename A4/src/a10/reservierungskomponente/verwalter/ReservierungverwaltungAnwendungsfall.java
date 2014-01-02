@@ -15,22 +15,20 @@ public class ReservierungverwaltungAnwendungsfall implements
 	}
 
 	@Override
-	public Zusatzleistung ErzeugeZusatzleistung(String name) {
-		// TODO Auto-generated method stub
-		return null;
+	public Zusatzleistung erzeugeZusatzleistung(String name) {
+		return this.reservierungverwalter.erzeugeZusatzleistung(name);
 	}
 
 	@Override
-	public Reservierung ReserviereZimmer(Integer gastNr, Integer zimmerNr) {
-		// TODO Auto-generated method stub
-		return null;
+	public Reservierung reserviereZimmer(Integer gastNr, Integer zimmerNr) {
+		return this.reservierungverwalter.reserviereZimmer(gastNr, zimmerNr);
 	}
 
 	@Override
-	public void BucheZusatzleistung(Integer reservierungNr,
+	public void bucheZusatzleistung(Integer reservierungNr,
 			Integer zusatzleistungNr) {
-		// TODO Auto-generated method stub
-
+		this.reservierungverwalter.bucheZusatzleistung(reservierungNr,
+				zusatzleistungNr);
 	}
 
 }

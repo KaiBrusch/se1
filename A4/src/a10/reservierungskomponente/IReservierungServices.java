@@ -4,9 +4,9 @@ import a10.reservierungskomponente.Zusatzleistung;
 
 public interface IReservierungServices {
 
-	Zusatzleistung ErzeugeZusatzleistung(String name);
+	Zusatzleistung erzeugeZusatzleistung(String name);
 
-	Reservierung ReserviereZimmer(Integer gastNr, Integer zimmerNr);
+	Reservierung reserviereZimmer(Integer gastNr, Integer zimmerNr);
 
-	void BucheZusatzleistung(Integer reservierungNr, Integer zusatzleistungNr);
+	void bucheZusatzleistung(Integer reservierungNr, Integer zusatzleistungNr);
 }

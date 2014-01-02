@@ -1,5 +1,7 @@
 package a10.reservierungskomponente;
 
+import a10.reservierungskomponente.Zusatzleistung;
+
 public interface IReservierungServices {
 
 	Zusatzleistung ErzeugeZusatzleistung(String name);

@@ -21,6 +21,7 @@ public class Contract {
 	}
 
 	public static class ContractViolatedException extends Exception {
+		private static final long serialVersionUID = 1L;
 		public ContractViolatedException(String message) {
 			super(message);
 		}

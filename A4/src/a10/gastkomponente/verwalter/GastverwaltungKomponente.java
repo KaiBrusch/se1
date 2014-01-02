@@ -9,23 +9,21 @@ public class GastverwaltungKomponente implements IGastServices {
 
 	private Gastverwalter gastVerwalter = null;
 	private GastverwaltungAnwendungsfall gastVerwaltungAnwendungsfall = null;
-	
-	public GastverwaltungKomponente(IPersistenzService persistenceManager)
-    {
+
+	public GastverwaltungKomponente(IPersistenzService persistenceManager) {
 		gastVerwalter = new Gastverwalter(persistenceManager);
-		gastVerwaltungAnwendungsfall = new GastverwaltungAnwendungsfall(gastVerwalter);
-    }
-	
+		gastVerwaltungAnwendungsfall = new GastverwaltungAnwendungsfall(
+				gastVerwalter);
+	}
+
 	@Override
 	public Gast erzeugeGast(Integer nr, String name, Email email) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.gastVerwaltungAnwendungsfall.erzeugeGast(nr, name, email);
 	}
 
 	@Override
 	public Gast sucheGastNachName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.gastVerwaltungAnwendungsfall.sucheGastNachName(name);
 	}
 
 }

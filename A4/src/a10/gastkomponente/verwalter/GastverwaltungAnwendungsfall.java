@@ -15,13 +15,12 @@ public class GastverwaltungAnwendungsfall implements IGastServices {
 	@Override
 	public Gast erzeugeGast(Integer nr, String name, Email email) {
 		// TODO Auto-generated method stub
-		return null;
+		return this.gastverwalter.erzeugeGast(name, email, email);
 	}
 
 	@Override
 	public Gast sucheGastNachName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return this.gastverwalter.sucheGastNachName(name);
 	}
 
 }

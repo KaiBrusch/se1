@@ -10,6 +10,9 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.lang.StringBuilder;
 
+import a10.gastkomponente.Email;
+import a10.gastkomponente.Gast;
+
 public class SqlConnecter {
 
   private Connection connect = null;
@@ -17,6 +20,11 @@ public class SqlConnecter {
   private ResultSet resultSet = null;
   private PreparedStatement preparedStatement = null;
 
+  
+  
+  
+  
+  
   public SqlConnecter() {
     try {
       Class.forName("com.mysql.jdbc.Driver");
@@ -32,6 +40,41 @@ public class SqlConnecter {
   }
 
 
+  
+  public ResultSet readGast(String name) throws Exception {
+	    try {
+
+	        // Statements allow to issue SQL queries to the database
+	        statement = connect.createStatement();
+	        // Result set get the result of the SQL query
+
+	        
+	        // writeMetaData(resultSet)
+	        //query builder
+	        String query = "select * from gast"
+	            + " where name = ".concat("'" + name + "'");
+	        // print query for debugging
+	        System.out.println(query);
+	        
+	        
+	        resultSet = statement.executeQuery(query);
+	    
+  	
+	      	
+	        return resultSet;
+	      } catch (Exception e) {
+	        throw e;
+	      } 
+	    }
+  
+  public Email emailConvertFromString(String plain){
+	  String [] s = plain.split("(@|\\.)");
+	  String name = s[0];
+	  String server = s[1];
+	  String domain = s[2];
+	  return Email.email(name, server, domain);
+  }
+  
   public void readFromDB(String name, String table,String identifier) throws Exception {
     try {
 
@@ -50,6 +93,9 @@ public class SqlConnecter {
       resultSet = statement.executeQuery(query);
       
       writeResultSet(resultSet);
+      
+    	  
+
     } catch (Exception e) {
       throw e;
     } finally {
@@ -101,54 +147,23 @@ public class SqlConnecter {
     }
   }
 
-  public void updateEntryFromDB(String table, String identifier ,ArrayList<String> list)
-      throws Exception {
-    try {
+  
 
-      if (table == "gast") {
-        String updateString = prepareUpdateString(list); 
-        preparedStatement = connect
-            .prepareStatement("update gast set "+updateString+" where name"+"'"+identifier+"'");
-        preparedStatement.setString(1, "");
-
-        preparedStatement.executeUpdate();
-      }
-      //construction going on here
-      if (table == "reservierung") {
-        preparedStatement = connect
-            .prepareStatement("update reservierung set  = where name="
-                + identifier + ";");
-        preparedStatement.setString(1, "");
-
-        preparedStatement.executeUpdate();
-      }
-      //construction going on here
-      if (table == "zusastzleistung") {
-        preparedStatement = connect
-            .prepareStatement("update zusatzleistung set  = where name="
-                + identifier + ";");
-        preparedStatement.setString(1, "");
-
-        preparedStatement.executeUpdate();
-
-      }
-
-    } catch (Exception e) {
-      throw e;
-    } finally {
-      close();
-    }
-  }
-
-  private String prepareUpdateString(ArrayList<String> list) {
+  private String prepareGastUpdateString(ArrayList<String> list) {
     
     StringBuilder result = new StringBuilder();
+
+    int index = 0;
     for (String object : list) {
-      if (object.length() == 0) {
-        result.append("");
+      if(object == ""){
+    	  index++;
+      }
+      if (index == 0) {
+        result.append("email ='"+object+"'");
+        index++;
       } else {
-        if(object == "")
-        result.append(",?");
+        result.append("email ='"+object+"'");
+        index++;
       }
     }
     return result.toString();

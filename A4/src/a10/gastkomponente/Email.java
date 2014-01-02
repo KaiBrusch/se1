@@ -71,8 +71,8 @@ public final class Email {
 	}
 
 	private boolean emailIsValid(String name, String server, String domain) {
-		if (name.matches("[a-z]") && server.matches("[a-z]")
-				&& domain.matches("[a-]")) {
+		if (name.matches("[a-z]+") && server.matches("[a-z]+")
+				&& domain.matches("[a-z]+")) {
 			return true;
 		}
 		return false;

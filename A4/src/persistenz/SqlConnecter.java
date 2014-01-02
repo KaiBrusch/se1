@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.lang.StringBuilder;
 
 import a10.gastkomponente.Email;
-import a10.gastkomponente.Gast;
+
 
 public class SqlConnecter implements IPersistenzService {
 

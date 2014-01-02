@@ -1,36 +1,24 @@
 package a10.gastkomponente.verwalter;
 
-import java.nio.channels.GatheringByteChannel;
 import java.sql.ResultSet;
-import java.util.ArrayList;
 
 import persistenz.*;
-import tests.EmailTest;
 import a10.gastkomponente.Gast;
 import a10.gastkomponente.Email;
-
 
 public class Gastverwalter {
 
 	public static void main(String[] args) throws Exception {
-		//
-		// connection.readDataBase("select * from test.gast");
-		// getGast("kai");
-		// createGast("dritter", "klein@grol.de", true);
+
 		SqlConnecter connection = new SqlConnecter();
 		Gastverwalter gw = new Gastverwalter(connection);
-
-		ArrayList<String> l = new ArrayList<>();
-		l.add("eins");
-		l.add("zwei");
-		l.add("drei");
-		l.add("");
 
 		// System.out.println(l.get(3));
 		// gw.sucheGastNachName("test");
 		// gw.erzeugeGast("peterPan", "elec@tek.de", true);
 		// gw.updateGast("test","lol@lol.de");
-		gw.sucheGastNachName("test");
+		Email em = Email.email("kai", "asd", "domain");
+		gw.erzeugeGast(2, "iak", em);
 	}
 
 	private IPersistenzService persistenzService;
@@ -40,47 +28,52 @@ public class Gastverwalter {
 
 	}
 
-	public Gast sucheGastNachName(String name) throws Exception {
+	public Gast sucheGastNachName(String name) {
 		// look by the name
 		ResultSet rs = persistenzService.read(name, "gast");
-		
+
 		String email = "";
 		Integer nr = 0;
 		String name_ = "";
-		while(rs.next()){
-			email = (rs.getString("Email"));
-			name_ = rs.getString("name");
-			nr = (rs.getInt(("Nr")));
-			
+		boolean stamm = false;
+		try {
+			while (rs.next()) {
+				email = (rs.getString("Email"));
+				name_ = rs.getString("name");
+				nr = (rs.getInt(("Nr")));
+				stamm = (rs.getBoolean("IstStammkunde"));
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
 		}
-		
-		Gast gast = new Gast(nr,name_,emailConvertFromString(email));
+		Gast gast = new Gast(nr, name_, emailConvertFromString(email));
 		System.out.println(gast);
 		return gast;
 	}
 
-	
-	 public Email emailConvertFromString(String plain){
-		  String [] s = plain.split("(@|\\.)");
-		  String name = s[0];
-		  String server = s[1];
-		  String domain = s[2];
-		  return Email.email(name, server, domain);
-	  }
+	public Gast erzeugeGast(Integer nr, String name, Email email) {
 
-	public void erzeugeGast(String name, String email, boolean stammkunde)
-			throws Exception {
+		try {
+			String query = "insert into gast values(" + nr + ", '" + name
+					+ "', '" + email.toString() + "', false)";
+			System.out.println(query);
 
-		// generate list with sql parameters
-		ArrayList<String> parameterList = new ArrayList<String>();
-		parameterList.add(name);
-		parameterList.add(email);
-		
-		String query = "";
-//		"gast", parameterList
-		// insert into table gast with given parameters
-		persistenzService.create(query);
+			persistenzService.create(query);
+			Gast gast = sucheGastNachName(name);
+			return gast;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
+	public Email emailConvertFromString(String plain) {
+		String[] s = plain.split("(@|\\.)");
+		String name = s[0];
+		String server = s[1];
+		String domain = s[2];
+		return Email.email(name, server, domain);
+	}
 
 }

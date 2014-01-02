@@ -15,7 +15,7 @@ public class GastverwaltungAnwendungsfall implements IGastServices {
 	@Override
 	public Gast erzeugeGast(Integer nr, String name, Email email) {
 		// TODO Auto-generated method stub
-		return this.gastverwalter.erzeugeGast(name, email, email);
+		return this.gastverwalter.erzeugeGast(nr, name, email);
 	}
 
 	@Override

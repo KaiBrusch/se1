@@ -1,2 +1,15 @@
-/a10
-/tests
+*.class
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+*.war
+*.ear
+*.DS_STORE
+*.out
+*.lock
+*.swp
+
+

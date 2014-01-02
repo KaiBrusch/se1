@@ -64,7 +64,7 @@ public final class Email {
 		try {
 			if (!emailIsValid(name, server, domain))
 				throw new InvalidAttributeValueException(
-						"name, server and domain shall match regexp [a-z]");
+						"name, server and domain shall match regexp [a-z]+");
 		} catch (InvalidAttributeValueException iave) {
 			iave.printStackTrace();
 		}

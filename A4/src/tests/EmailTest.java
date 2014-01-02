@@ -10,11 +10,11 @@ public class EmailTest {
 
 	@Test
 	public void testEmail() {
-		Email email = Email.email("Matthias", "gmail", "com");
-		assertEquals("Matthias", email.getName());
+		Email email = Email.email("matthias", "gmail", "com");
+		assertEquals("matthias", email.getName());
 		assertEquals("gmail", email.getServer());
 		assertEquals("com", email.getDomain());
-		assertEquals("Matthias@gmail.com", email.toString());
+		assertEquals("matthias@gmail.com", email.toString());
 	}
 
 }

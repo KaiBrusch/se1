@@ -1,5 +1,7 @@
 package a10.gastkomponente;
 
+import javax.management.InvalidAttributeValueException;
+
 public final class Email {
 
 	private String name;
@@ -8,6 +10,7 @@ public final class Email {
 
 	// Initialization
 	private Email(String name, String server, String domain) {
+		emailIsValidOrThrow(name, server, domain);
 		this.name = name;
 		this.server = server;
 		this.domain = domain;
@@ -54,6 +57,25 @@ public final class Email {
 			acc += b;
 		long longBits = Double.doubleToLongBits(acc);
 		return (int) (longBits ^ (longBits >>> 32));
+	}
+
+	// Exception Handling
+	private void emailIsValidOrThrow(String name, String server, String domain) {
+		try {
+			if (!emailIsValid(name, server, domain))
+				throw new InvalidAttributeValueException(
+						"name, server and domain shall match regexp [a-z]");
+		} catch (InvalidAttributeValueException iave) {
+			iave.printStackTrace();
+		}
+	}
+
+	private boolean emailIsValid(String name, String server, String domain) {
+		if (name.matches("[a-z]") && server.matches("[a-z]")
+				&& domain.matches("[a-]")) {
+			return true;
+		}
+		return false;
 	}
 
 }

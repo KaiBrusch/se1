@@ -28,16 +28,4 @@ public class GastverwaltungKomponente implements IGastServices {
 		return null;
 	}
 
-	@Override
-	public void updateGast(Gast gast) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void deleteGast(Gast gast) {
-		// TODO Auto-generated method stub
-		
-	}
-
 }

@@ -19,8 +19,8 @@ public class BuchungsFassade {
 	private IGastServicesFuerReservierung gastServiceFuerReservierung;
 	private IReservierungServices reservierungService;
 
-	public BuchungsFassade() {
-		this.persistenceService = new SqlConnecter();
+	public BuchungsFassade(IPersistenzService persistenceService) {
+		this.persistenceService = persistenceService;
 		this.gastService = new GastverwaltungKomponente(persistenceService);
 		this.reservierungService = new ReservierungverwaltungKomponente(
 				persistenceService);

@@ -95,7 +95,7 @@ public class WorkflowIntegrationTest {
 
 	@After
 	public void tearDown() {
-		persistenceService.cleardDB();
+		persistenceService.clearDB();
 		persistenceService = null;
 		buchungsFassade = null;
 	}

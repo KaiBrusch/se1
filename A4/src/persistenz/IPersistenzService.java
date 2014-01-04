@@ -11,6 +11,10 @@ public interface IPersistenzService {
 	ResultSet readPlainSql(String query);
 	
 	void writePlainSql(String query);
+	
+	void clearDB();
+	
+	void buildDB();
 
 	
 }

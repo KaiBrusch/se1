@@ -76,7 +76,7 @@ public class ReservierungsKomponenteTest {
 
 	@After
 	public void tearDown() {
-		this.persistenceService.cleardDB();
+		this.persistenceService.clearDB();
 		this.persistenceService = null;
 		this.gastService = null;
 		this.reservierungService = null;

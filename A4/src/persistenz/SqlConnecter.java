@@ -12,7 +12,6 @@ import java.lang.StringBuilder;
 
 import a10.gastkomponente.Email;
 
-
 public class SqlConnecter implements IPersistenzService {
 
 	private Connection connect = null;
@@ -34,14 +33,37 @@ public class SqlConnecter implements IPersistenzService {
 		}
 	}
 
-	public ResultSet read(String name, String table) {
+	public ResultSet readPlainSql(String query){
+		try {
+			statement = connect.createStatement();
+			resultSet = statement.executeQuery(query);
+			return resultSet;
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	public void writePlainSql(String query){
+		try {
+			preparedStatement = connect.prepareStatement(query);
+			preparedStatement.executeUpdate();
+		}catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	public ResultSet read(String name, String table, String identifier) {
 		try {
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
 			// Result set get the result of the SQL query
 			// query builder
 			String query = "select * from " + table
-					+ " where name = ".concat("'" + name + "'");
+					+ " where "+identifier+" = ".concat("'" + name + "'");
 			// print query for debugging
 			System.out.println(query);
 
@@ -63,6 +85,7 @@ public class SqlConnecter implements IPersistenzService {
 
 	public void create(String query) {
 		try {
+			
 			preparedStatement = connect.prepareStatement(query);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {

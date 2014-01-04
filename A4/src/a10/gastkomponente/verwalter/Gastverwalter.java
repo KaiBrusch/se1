@@ -8,19 +8,6 @@ import a10.gastkomponente.Email;
 
 public class Gastverwalter {
 
-	public static void main(String[] args) throws Exception {
-
-		SqlConnecter connection = new SqlConnecter();
-		Gastverwalter gw = new Gastverwalter(connection);
-
-		// System.out.println(l.get(3));
-		// gw.sucheGastNachName("test");
-		// gw.erzeugeGast("peterPan", "elec@tek.de", true);
-		// gw.updateGast("test","lol@lol.de");
-		Email em = Email.email("kai", "asd", "domain");
-		gw.erzeugeGast(2, "iak", em);
-	}
-
 	private IPersistenzService persistenzService;
 
 	public Gastverwalter(IPersistenzService persistenzService) {
@@ -30,14 +17,16 @@ public class Gastverwalter {
 
 	public Gast sucheGastNachName(String name) {
 		// look by the name
-		ResultSet rs = persistenzService.read(name, "gast");
+		ResultSet rs = persistenzService.read(name, "gast", "name");
 
 		String email = "";
 		Integer nr = 0;
+		String name_ = "";
 		boolean stamm = false;
 		try {
 			while (rs.next()) {
 				email = (rs.getString("Email"));
+				name_ = rs.getString("name");
 				nr = (rs.getInt(("Nr")));
 				stamm = (rs.getBoolean("IstStammkunde"));
 
@@ -45,7 +34,7 @@ public class Gastverwalter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Gast gast = new Gast(nr, name, emailConvertFromString(email));
+		Gast gast = new Gast(nr, name_, emailConvertFromString(email));
 		System.out.println(gast);
 		return gast;
 	}
@@ -66,6 +55,11 @@ public class Gastverwalter {
 		return null;
 	}
 
+	
+	public void markiereGastAlsStammkunde(Integer nr){
+		
+	}
+	
 	public Email emailConvertFromString(String plain) {
 		String[] s = plain.split("(@|\\.)");
 		String name = s[0];

@@ -8,7 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import java.lang.StringBuilder;
 
 import a10.gastkomponente.Email;
 
@@ -33,37 +32,35 @@ public class SqlConnecter implements IPersistenzService {
 		}
 	}
 
-	public ResultSet readPlainSql(String query){
+	public ResultSet readPlainSql(String query) {
 		try {
 			statement = connect.createStatement();
 			resultSet = statement.executeQuery(query);
 			return resultSet;
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return null;
 	}
-	
-	public void writePlainSql(String query){
+
+	public void writePlainSql(String query) {
 		try {
 			preparedStatement = connect.prepareStatement(query);
 			preparedStatement.executeUpdate();
-		}catch (SQLException e) {
+		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 	}
-	
-	
-	
+
 	public ResultSet read(String name, String table, String identifier) {
 		try {
 			// Statements allow to issue SQL queries to the database
 			statement = connect.createStatement();
 			// Result set get the result of the SQL query
 			// query builder
-			String query = "select * from " + table
-					+ " where "+identifier+" = ".concat("'" + name + "'");
+			String query = "select * from " + table + " where " + identifier
+					+ " = ".concat("'" + name + "'");
 			// print query for debugging
 			System.out.println(query);
 
@@ -85,7 +82,7 @@ public class SqlConnecter implements IPersistenzService {
 
 	public void create(String query) {
 		try {
-			
+
 			preparedStatement = connect.prepareStatement(query);
 			preparedStatement.executeUpdate();
 		} catch (SQLException e) {
@@ -134,32 +131,14 @@ public class SqlConnecter implements IPersistenzService {
 		}
 	}
 
-	private void removeFromDB(String name, String table) throws Exception {
-		try {
-			preparedStatement = connect.prepareStatement("delete from " + table
-					+ " where name = ? ;");
-			preparedStatement.setString(1, name);
-
-			preparedStatement.executeUpdate();
-
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			close();
-
-		}
-	}
-
 	private void close() {
 		try {
 			if (resultSet != null) {
 				resultSet.close();
 			}
-
 			if (statement != null) {
 				statement.close();
 			}
-
 			if (connect != null) {
 				connect.close();
 			}
@@ -169,11 +148,7 @@ public class SqlConnecter implements IPersistenzService {
 	}
 
 	private void writeMetaData(ResultSet resultSet) throws SQLException {
-		// Now get some metadata from the database
-		// Result set get the result of the SQL query
-
 		System.out.println("The columns in the table are: ");
-
 		System.out.println("Table: " + resultSet.getMetaData().getTableName(1));
 		for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++) {
 			System.out.println("Column " + i + " "
@@ -182,21 +157,12 @@ public class SqlConnecter implements IPersistenzService {
 	}
 
 	private void writeResultSet(ResultSet resultSet) throws SQLException {
-		// ResultSet is initially before the first data set
 		while (resultSet.next()) {
-			// It is possible to get the columns via name
-			// also possible to get the columns via the column number
-			// which starts at 1
-			// e.g. resultSet.getSTring(2);
 			String nr = resultSet.getString("Nr");
 			String name = resultSet.getString("Name");
 			String email = resultSet.getString("Email");
-
-			System.out.println("Nummer: " + nr);
-			System.out.println("name: " + name);
-			System.out.println("email: " + email);
-
+			System.out.println("Nummer: " + nr + " name: " + name + " email: "
+					+ email);
 		}
-
 	}
 }

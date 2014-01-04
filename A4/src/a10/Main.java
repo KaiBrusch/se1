@@ -5,6 +5,7 @@ import persistenz.SqlConnecter;
 import a10.gastkomponente.Email;
 import a10.gastkomponente.Gast;
 import a10.gastkomponente.IGastServices;
+import a10.gastkomponente.IGastServicesFuerReservierung;
 import a10.gastkomponente.verwalter.GastverwaltungKomponente;
 import a10.reservierungskomponente.IReservierungServices;
 import a10.reservierungskomponente.Reservierung;
@@ -49,7 +50,9 @@ public class Main {
 		reservierungService.bucheZusatzleistung(res.getNr(),
 				vollpension.getNr());
 		reservierungService.bucheZusatzleistung(res.getNr(), wlan.getNr());
-		// makeStammKunde (Assertion 5 Reservierungen || 3 reservierungen 
+		// makeStammKunde (Assertion 5 Reservierungen || 3 reservierungen
+		IGastServicesFuerReservierung stammkunde = (IGastServicesFuerReservierung) matze;
+		stammkunde.markiereGastAlsStammkunden(matze.getNr());
 
 	}
 }

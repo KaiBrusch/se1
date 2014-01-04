@@ -2,11 +2,15 @@ package tests;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+
 import static junit.framework.Assert.*;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
+import persistenz.IPersistenzService;
+import persistenz.SqlConnecter;
 import a10.BuchungsFassade;
 import a10.gastkomponente.Email;
 import a10.gastkomponente.Gast;
@@ -18,10 +22,12 @@ public class WorkflowIntegrationTest {
 	private ArrayList<Object> gast1, gast2, gast3;
 	private ArrayList<ArrayList<Object>> guests;
 	private BuchungsFassade buchungsFassade;
+	private IPersistenzService persistenceService = new SqlConnecter();
 
 	@Before
 	public void setUp() {
-		this.buchungsFassade = new BuchungsFassade();
+		persistenceService.buildDB();
+		this.buchungsFassade = new BuchungsFassade(persistenceService);
 		this.gast1 = createList(1, "matthias");
 		this.gast2 = createList(2, "kai");
 		this.gast3 = createList(3, "tree");
@@ -89,7 +95,9 @@ public class WorkflowIntegrationTest {
 
 	@After
 	public void tearDown() {
-
+		persistenceService.cleardDB();
+		persistenceService = null;
+		buchungsFassade = null;
 	}
 
 	private ArrayList<Object> createList(Integer nr, String name) {

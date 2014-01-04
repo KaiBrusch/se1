@@ -28,6 +28,7 @@ public class ReservierungsKomponenteTest {
 	@Before
 	public void setUp() {
 		this.persistenceService = new SqlConnecter();
+		this.persistenceService.buildDB();
 		this.gastService = new GastverwaltungKomponente(persistenceService);
 		this.reservierungService = new ReservierungverwaltungKomponente(
 				persistenceService);
@@ -75,6 +76,7 @@ public class ReservierungsKomponenteTest {
 
 	@After
 	public void tearDown() {
+		this.persistenceService.cleardDB();
 		this.persistenceService = null;
 		this.gastService = null;
 		this.reservierungService = null;

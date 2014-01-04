@@ -3,11 +3,9 @@ package a10.reservierungskomponente.verwalter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import a10.gastkomponente.Gast;
 import a10.reservierungskomponente.Reservierung;
 import a10.reservierungskomponente.Zusatzleistung;
 import persistenz.IPersistenzService;
-import a10.reservierungskomponente.Zusatzleistung;
 
 public class Reservierungverwalter {
 

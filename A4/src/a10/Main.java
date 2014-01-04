@@ -1,15 +1,9 @@
 package a10;
 
-import persistenz.IPersistenzService;
-import persistenz.SqlConnecter;
 import a10.gastkomponente.Email;
 import a10.gastkomponente.Gast;
-import a10.gastkomponente.IGastServices;
-import a10.gastkomponente.verwalter.GastverwaltungKomponente;
-import a10.reservierungskomponente.IReservierungServices;
 import a10.reservierungskomponente.Reservierung;
 import a10.reservierungskomponente.Zusatzleistung;
-import a10.reservierungskomponente.verwalter.ReservierungverwaltungKomponente;
 
 public class Main {
 
@@ -53,6 +47,11 @@ public class Main {
 			bf.bucheZusatzleistung(res.getNr(), sauna.getNr());
 		}
 
-		Reservierung res = bf.reserviereZimmer(tree.getNr(), 20);
+		bf.reserviereZimmer(tree.getNr(), 20);
+		
+		matze = bf.sucheGastNachName("matthias");
+		kai = bf.sucheGastNachName("kai");
+		tree = bf.sucheGastNachName("tree");
+		
 	}
 }

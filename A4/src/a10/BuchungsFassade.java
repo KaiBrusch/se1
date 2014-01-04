@@ -24,6 +24,8 @@ public class BuchungsFassade {
 		this.gastService = new GastverwaltungKomponente(persistenceService);
 		this.reservierungService = new ReservierungverwaltungKomponente(
 				persistenceService);
+		this.gastServiceFuerReservierung = new ReservierungverwaltungKomponente(
+				persistenceService);
 	}
 
 	public Zusatzleistung erzeugeZusatzleistung(String name) {

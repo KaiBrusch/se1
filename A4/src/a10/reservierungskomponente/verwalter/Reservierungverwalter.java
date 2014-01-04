@@ -131,7 +131,7 @@ public class Reservierungverwalter {
 			e.printStackTrace();
 		}
 
-		if (zusatzreservierung > 4 || reservierung > 10) {
+		if (zusatzreservierung > 2 || reservierung > 4) {
 			persistenzService.writePlainSql(updateQuery);
 			System.out.println("That dude with id " + nr + " is eligible!");
 		} else {

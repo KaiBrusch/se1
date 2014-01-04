@@ -6,7 +6,8 @@ import a10.reservierungskomponente.IReservierungServices;
 import a10.reservierungskomponente.Reservierung;
 import a10.reservierungskomponente.Zusatzleistung;
 
-public class ReservierungverwaltungKomponente implements IReservierungServices {
+public class ReservierungverwaltungKomponente implements IReservierungServices,
+		IGastServicesFuerReservierung {
 
 	private Reservierungverwalter resVerwalter = null;
 	private ReservierungverwaltungAnwendungsfall resVerwaltungAnwendungsfall = null;
@@ -34,6 +35,16 @@ public class ReservierungverwaltungKomponente implements IReservierungServices {
 			Integer zusatzleistungNr) {
 		this.resVerwaltungAnwendungsfall.bucheZusatzleistung(reservierungNr,
 				zusatzleistungNr);
+	}
+
+	@Override
+	public void markiereGastAlsStammkunden(Integer nr) {
+		this.resVerwaltungAnwendungsfall.markiereGastAlsStammkunden(nr);
+	}
+
+	@Override
+	public Integer sucheGastNrNachReservierungNr(Integer reservierungNr) {
+		return this.resVerwaltungAnwendungsfall.sucheGastNrNachReservierungNr(reservierungNr);
 	}
 
 }

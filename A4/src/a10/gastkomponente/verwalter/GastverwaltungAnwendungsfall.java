@@ -3,11 +3,9 @@ package a10.gastkomponente.verwalter;
 import a10.gastkomponente.Email;
 import a10.gastkomponente.Gast;
 import a10.gastkomponente.IGastServices;
-import a10.gastkomponente.IGastServicesFuerReservierung;
 import a10.util.Contract;
 
-public class GastverwaltungAnwendungsfall implements IGastServices,
-		IGastServicesFuerReservierung {
+public class GastverwaltungAnwendungsfall implements IGastServices {
 
 	private Gastverwalter gastverwalter = null;
 
@@ -29,10 +27,4 @@ public class GastverwaltungAnwendungsfall implements IGastServices,
 		Contract.requires(name != null && name.length() > 0);
 		return this.gastverwalter.sucheGastNachName(name);
 	}
-
-	@Override
-	public void markiereGastAlsStammkunden(Integer nr) {
-		this.gastverwalter.markiereGastAlsStammkunde(nr);
-	}
-
 }

@@ -15,6 +15,31 @@ public class Gastverwalter {
 
 	}
 
+	public Gast sucheGastNachNr(Integer id) {
+		// look by the name
+		ResultSet rs = persistenzService.read(String.valueOf(id), "gast",
+				"name");
+
+		String email = "";
+		Integer nr = 0;
+		String name_ = "";
+		boolean stamm = false;
+		try {
+			while (rs.next()) {
+				email = (rs.getString("Email"));
+				name_ = rs.getString("name");
+				nr = (rs.getInt(("Nr")));
+				stamm = (rs.getBoolean("IstStammkunde"));
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		Gast gast = new Gast(nr, name_, emailConvertFromString(email), stamm);
+		System.out.println(gast);
+		return gast;
+	}
+
 	public Gast sucheGastNachName(String name) {
 		// look by the name
 		ResultSet rs = persistenzService.read(name, "gast", "name");
@@ -34,7 +59,7 @@ public class Gastverwalter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		Gast gast = new Gast(nr, name_, emailConvertFromString(email));
+		Gast gast = new Gast(nr, name_, emailConvertFromString(email), stamm);
 		System.out.println(gast);
 		return gast;
 	}
@@ -55,11 +80,6 @@ public class Gastverwalter {
 		return null;
 	}
 
-	
-	public void markiereGastAlsStammkunde(Integer nr){
-		
-	}
-	
 	public Email emailConvertFromString(String plain) {
 		String[] s = plain.split("(@|\\.)");
 		String name = s[0];

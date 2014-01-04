@@ -9,4 +9,6 @@ public interface IReservierungServices {
 	Reservierung reserviereZimmer(Integer gastNr, Integer zimmerNr);
 
 	void bucheZusatzleistung(Integer reservierungNr, Integer zusatzleistungNr);
+	
+	Integer sucheGastNrNachReservierungNr(Integer reservierungNr);
 }

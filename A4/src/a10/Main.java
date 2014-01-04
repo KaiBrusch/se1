@@ -41,7 +41,7 @@ public class Main {
 		Zusatzleistung vollpension = bf.erzeugeZusatzleistung("Vollpension");
 		Zusatzleistung wlan = bf.erzeugeZusatzleistung("WLAN");
 
-		for (int i = 0; i < 10; i++) {
+		for (int i = 1; i < 10; i++) {
 			Reservierung res = bf.reserviereZimmer(matze.getNr(), i);
 			bf.bucheZusatzleistung(res.getNr(), sauna.getNr());
 			bf.bucheZusatzleistung(res.getNr(), vollpension.getNr());

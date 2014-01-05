@@ -20,13 +20,12 @@ import a10.reservierungskomponente.Zusatzleistung;
 public class WorkflowIntegrationTest {
 
 	private ArrayList<Object> gast1, gast2, gast3;
-	private ArrayList<ArrayList<Object>> guests;
+	private ArrayList<ArrayList<Object>> guests = new ArrayList<ArrayList<Object>>();
 	private BuchungsFassade buchungsFassade;
 	private IPersistenzService persistenceService = new SqlConnecter();
 
 	@Before
 	public void setUp() {
-		persistenceService.buildDB();
 		this.buchungsFassade = new BuchungsFassade(persistenceService);
 		this.gast1 = createList(1, "matthias");
 		this.gast2 = createList(2, "kai");
@@ -95,7 +94,6 @@ public class WorkflowIntegrationTest {
 
 	@After
 	public void tearDown() {
-		persistenceService.clearDB();
 		persistenceService = null;
 		buchungsFassade = null;
 	}

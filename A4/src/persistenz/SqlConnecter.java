@@ -131,6 +131,7 @@ public class SqlConnecter implements IPersistenzService {
 		}
 	}
 
+	
 	private void close() {
 		try {
 			if (resultSet != null) {
@@ -166,62 +167,45 @@ public class SqlConnecter implements IPersistenzService {
 		}
 	}
 
-	@Override
-	public void clearDB() {
-		try {
-			String query = ("DROP TABLE IF EXISTS z2r;"
-					+ " DROP TABLE IF EXISTS Reservierung;"
-					+ " DROP TABLE IF EXISTS Zusatzleistung;"
-					+ " DROP TABLE IF EXISTS Gast;"
-					+ " DROP TABLE IF EXISTS user_summary;");
-			preparedStatement = connect.prepareStatement(query);
-			preparedStatement.executeUpdate();
-			connect.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
+//	@Override
+//	public void clearDB() {
+//		try {
+//			String[] query = { "DROP TABLE IF EXISTS z2r;",
+//					" DROP TABLE IF EXISTS Reservierung;",
+//					" DROP TABLE IF EXISTS Zusatzleistung;",
+//					" DROP TABLE IF EXISTS Gast;",
+//					" DROP TABLE IF EXISTS user_summary;" };
+//			for (int i = 0; i < query.length; i++) {
+//				preparedStatement = connect.prepareStatement(query[i]);
+//				preparedStatement.executeUpdate();
+//
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//
+//		}
+//	}
 
-		}
-	}
-	
-	@Override
-	public void buildDB() {
-		try {
-			String query = ("CREATE TABLE Gast("+
-					" Nr INT(2) NOT NULL AUTO_INCREMENT"+
-					" Name VARCHAR(20),"+
-					" Email VARCHAR(30),"+
-					" IstStammKunde BOOLEAN,"+
-					" PRIMARY KEY(Nr)"+
-					");"+
-					"CREATE TABLE Reservierung("+
-					" nr INT(2) NOT NULL AUTO_INCREMENT,"+
-					" PRIMARY KEY(nr),"+
-					" ZimmerNr INT(2),"+
-					" gast_id int(2),"+
-					" FOREIGN KEY (gast_id) REFERENCES gast(nr)"+
+//	@Override
+//	public void buildDB() {
+//		try {
+//			clearDB();
+//			String[] query = {
+//					"CREATE TABLE Gast(Nr INT(2) NOT NULL AUTO_INCREMENT, Name VARCHAR(20), Email VARCHAR(30), IstStammKunde BOOLEAN,"
+//							+ " PRIMARY KEY(Nr));",
+//					"CREATE TABLE Reservierung(nr INT(2) NOT NULL AUTO_INCREMENT,PRIMARY KEY(nr), ZimmerNr INT(2), gast_id int(2), FOREIGN KEY (gast_id) REFERENCES gast(nr));",
+//					"CREATE TABLE Zusatzleistung(Nr INT(2) NOT NULL AUTO_INCREMENT,LeistungsArt VARCHAR(30),PRIMARY KEY (Nr)); ",
+//					"ALTER TABLE Zusatzleistung ADD UNIQUE (LeistungsArt)",
+//					"create table z2r(id int(2) NOT NULL AUTO_INCREMENT,r_id int(2),FOREIGN KEY (r_id) REFERENCES reservierung(nr),z_id int(2),FOREIGN KEY (z_id) REFERENCES zusatzleistung(nr),primary key(id));" };
+//			for (int i = 0; i < query.length; i++) {
+//				preparedStatement = connect.prepareStatement(query[i]);
+//				preparedStatement.executeUpdate();
+//			}
+//
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//
+//		}
+//	}
 
-					");"+
-					"CREATE TABLE Zusatzleistung("+
-					" Nr INT(2) NOT NULL AUTO_INCREMENT,"+
-					" LeistungsArt VARCHAR(30),"+
-					" PRIMARY KEY (Nr)"+
-					");"+
-					"ALTER TABLE Zusatzleistung"+
-					"ADD UNIQUE (LeistungsArt);"+
-					"create table z2r("+
-					" id int(2) NOT NULL AUTO_INCREMENT,"+
-					" r_id int(2),"+
-					" FOREIGN KEY (r_id) REFERENCES reservierung(nr),"+
-					" z_id int(2),"+
-					" FOREIGN KEY (z_id) REFERENCES zusatzleistung(nr),"+
-					" primary key(id)"+
-					")");
-			preparedStatement = connect.prepareStatement(query);
-			preparedStatement.executeUpdate();
-			connect.close();
-		} catch (SQLException e) {
-			e.printStackTrace();
-
-		}
-	}
 }

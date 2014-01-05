@@ -25,7 +25,7 @@ public class Main {
 		Email email3 = Email.email(name3, "gmail", "org");
 
 		IPersistenzService persistenceService = new SqlConnecter();
-		persistenceService.buildDB();
+		
 		BuchungsFassade bf = new BuchungsFassade(persistenceService);
 		bf.erzeugeGast(nr, name, email);
 		bf.erzeugeGast(nr2, name2, email2);

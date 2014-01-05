@@ -12,9 +12,4 @@ public interface IPersistenzService {
 	
 	void writePlainSql(String query);
 	
-	void clearDB();
-	
-	void buildDB();
-
-	
 }

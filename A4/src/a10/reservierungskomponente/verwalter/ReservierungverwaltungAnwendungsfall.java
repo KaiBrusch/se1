@@ -25,7 +25,7 @@ public class ReservierungverwaltungAnwendungsfall implements
 	@Override
 	public Reservierung reserviereZimmer(Integer gastNr, Integer zimmerNr) {
 		Contract.requires(gastNr != null && gastNr > 0);
-		Contract.requires(zimmerNr != null && zimmerNr > 0);
+		Contract.requires(zimmerNr != null);
 		return this.reservierungverwalter.reserviereZimmer(gastNr, zimmerNr);
 	}
 

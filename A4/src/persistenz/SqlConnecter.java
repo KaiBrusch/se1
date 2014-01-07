@@ -7,7 +7,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
 
 import a10.gastkomponente.Email;
 
@@ -27,7 +26,6 @@ public class SqlConnecter implements IPersistenzService {
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -90,48 +88,6 @@ public class SqlConnecter implements IPersistenzService {
 		}
 	}
 
-	public void insertIntoDB(String table, ArrayList<String> list)
-			throws Exception {
-		try {
-
-			if (table == "gast") {
-
-				preparedStatement = connect
-						.prepareStatement("insert into gast values(default, ?,?,?);");
-				preparedStatement.setString(1, list.get(0));
-				preparedStatement.setString(2, list.get(1));
-				preparedStatement.setBoolean(3, false);
-
-				preparedStatement.executeUpdate();
-			}
-			// construction going on here
-			if (table == "reservierung") {
-
-				preparedStatement = connect
-						.prepareStatement("insert into gast values(default, ?;");
-				preparedStatement.setString(1, list.get(0));
-
-				preparedStatement.executeUpdate();
-			}
-			// construction going on here
-			if (table == "zusastzleistung") {
-
-				preparedStatement = connect
-						.prepareStatement("insert into gast values(default, ?;");
-				preparedStatement.setString(1, list.get(0));
-
-				preparedStatement.executeUpdate();
-
-			}
-		} catch (Exception e) {
-			throw e;
-		} finally {
-			close();
-
-		}
-	}
-
-	
 	private void close() {
 		try {
 			if (resultSet != null) {
@@ -148,64 +104,23 @@ public class SqlConnecter implements IPersistenzService {
 		}
 	}
 
-	private void writeMetaData(ResultSet resultSet) throws SQLException {
-		System.out.println("The columns in the table are: ");
-		System.out.println("Table: " + resultSet.getMetaData().getTableName(1));
-		for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++) {
-			System.out.println("Column " + i + " "
-					+ resultSet.getMetaData().getColumnName(i));
-		}
-	}
-
-	private void writeResultSet(ResultSet resultSet) throws SQLException {
-		while (resultSet.next()) {
-			String nr = resultSet.getString("Nr");
-			String name = resultSet.getString("Name");
-			String email = resultSet.getString("Email");
-			System.out.println("Nummer: " + nr + " name: " + name + " email: "
-					+ email);
-		}
-	}
-
-//	@Override
-//	public void clearDB() {
-//		try {
-//			String[] query = { "DROP TABLE IF EXISTS z2r;",
-//					" DROP TABLE IF EXISTS Reservierung;",
-//					" DROP TABLE IF EXISTS Zusatzleistung;",
-//					" DROP TABLE IF EXISTS Gast;",
-//					" DROP TABLE IF EXISTS user_summary;" };
-//			for (int i = 0; i < query.length; i++) {
-//				preparedStatement = connect.prepareStatement(query[i]);
-//				preparedStatement.executeUpdate();
-//
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//
-//		}
-//	}
-
-//	@Override
-//	public void buildDB() {
-//		try {
-//			clearDB();
-//			String[] query = {
-//					"CREATE TABLE Gast(Nr INT(2) NOT NULL AUTO_INCREMENT, Name VARCHAR(20), Email VARCHAR(30), IstStammKunde BOOLEAN,"
-//							+ " PRIMARY KEY(Nr));",
-//					"CREATE TABLE Reservierung(nr INT(2) NOT NULL AUTO_INCREMENT,PRIMARY KEY(nr), ZimmerNr INT(2), gast_id int(2), FOREIGN KEY (gast_id) REFERENCES gast(nr));",
-//					"CREATE TABLE Zusatzleistung(Nr INT(2) NOT NULL AUTO_INCREMENT,LeistungsArt VARCHAR(30),PRIMARY KEY (Nr)); ",
-//					"ALTER TABLE Zusatzleistung ADD UNIQUE (LeistungsArt)",
-//					"create table z2r(id int(2) NOT NULL AUTO_INCREMENT,r_id int(2),FOREIGN KEY (r_id) REFERENCES reservierung(nr),z_id int(2),FOREIGN KEY (z_id) REFERENCES zusatzleistung(nr),primary key(id));" };
-//			for (int i = 0; i < query.length; i++) {
-//				preparedStatement = connect.prepareStatement(query[i]);
-//				preparedStatement.executeUpdate();
-//			}
-//
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//
-//		}
-//	}
+	// private void writeMetaData(ResultSet resultSet) throws SQLException {
+	// System.out.println("The columns in the table are: ");
+	// System.out.println("Table: " + resultSet.getMetaData().getTableName(1));
+	// for (int i = 1; i <= resultSet.getMetaData().getColumnCount(); i++) {
+	// System.out.println("Column " + i + " "
+	// + resultSet.getMetaData().getColumnName(i));
+	// }
+	// }
+	//
+	// private void writeResultSet(ResultSet resultSet) throws SQLException {
+	// while (resultSet.next()) {
+	// String nr = resultSet.getString("Nr");
+	// String name = resultSet.getString("Name");
+	// String email = resultSet.getString("Email");
+	// System.out.println("Nummer: " + nr + " name: " + name + " email: "
+	// + email);
+	// }
+	// }
 
 }

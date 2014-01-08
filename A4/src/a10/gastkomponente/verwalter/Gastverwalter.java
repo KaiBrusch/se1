@@ -89,14 +89,19 @@ public class Gastverwalter {
 
 	public void markiereGastAlsStammkunden(int nr) {
 
-		String searchQuery = "select gast_id, count(distinct q.nr) as reservierung, count(distinct z.r_id) as zusatzreservierung "
-				+ "from (select r.gast_id, r.nr from reservierung r "
+		String searchQuery = "select q.gast_id, count(distinct q.nr) as reservierung, count(z.r_id) as zusatzreservierung "
+				+ "from (select r.gast_id,  r.nr "
+				+ "from reservierung r "
 				+ "where gast_id= "
 				+ nr
-				+ " "
-				+ "group by nr )q "
-				+ "inner join z2r z on z.r_id = q.nr";
+				+ ")q " 
+				+ "left outer join " 
+				+ "(select p.r_id "
+				+ "from z2r p "
+				+ ")z "
+				+ "ON q.nr=z.r_id ";
 
+		System.out.print(searchQuery);
 		String updateQuery = "update gast set IstStammkunde = true where nr = "
 				+ nr + ";";
 
